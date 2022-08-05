@@ -6,6 +6,14 @@ Easy to play & build Breakout Game binary built in Rust with macroquad game libr
 
 ## Development
 
+### Release
+
+- Incremental releases: (v0.1.1 --> v0.1.2)
+
+```sh
+cargo release patch --no-publish --execute
+```
+
 ### Pre-requisites
 
 - Audio library (optional)
