@@ -78,9 +78,6 @@ impl Default for Player {
 #[cfg(test)]
 mod tests {
     use std::time::SystemTime;
-
-    use macroquad::miniquad::{date::now, native::linux_x11::libx11::Time};
-
     use super::*;
 
     #[test]
