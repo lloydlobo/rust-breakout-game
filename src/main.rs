@@ -1,17 +1,46 @@
 use macroquad::prelude::*;
 
 ////////////////////////////////////////////////////////////
-// start-region:   ---      CONSTANTS
+// start-region: -->      CONSTANTS
 ////////////////////////////////////////////////////////////
 
 const PLAYER_SIZE: Vec2 = const_vec2!([150f32, 40f32]);
 
 ////////////////////////////////////////////////////////////
-// __end-region:   ---      CONSTANTS
+// __end-region: <--      CONSTANTS
 ////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////
-// start-region:   ---      MAIN
+// start-region: -->      PLAYER
+////////////////////////////////////////////////////////////
+
+struct Player {
+    rect: Rect,
+}
+
+impl Player {
+    pub fn new() -> Self {
+        Self {
+            rect: Rect::new(
+                screen_width() * 0.5f32 - PLAYER_SIZE.x * 0.5f32,
+                screen_height() - 100f32,
+                PLAYER_SIZE.x,
+                PLAYER_SIZE.y,
+            ),
+        }
+    }
+
+    pub fn draw(&self) {
+        draw_rectangle(self.rect.x, self.rect.y, self.rect.w, self.rect.h, DARKGRAY);
+    }
+}
+
+////////////////////////////////////////////////////////////
+// __end-region: <--      PLAYER
+////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////
+// start-region: -->      MAIN
 ////////////////////////////////////////////////////////////
 
 /// Main
@@ -20,26 +49,14 @@ const PLAYER_SIZE: Vec2 = const_vec2!([150f32, 40f32]);
 /// https://macroquad.rs/docs/
 #[macroquad::main("BasicShapes")]
 async fn main() {
-    let player_rect = Rect::new(
-        screen_width() * 0.5f32,
-        screen_height() - 100f32,
-        PLAYER_SIZE.x,
-        PLAYER_SIZE.y,
-    );
-
+    let player_rect = Player::new();
     loop {
         clear_background(SKYBLUE);
-        draw_rectangle(
-            player_rect.x,
-            player_rect.y,
-            player_rect.w,
-            player_rect.h,
-            DARKGRAY,
-        );
+        Player::draw(&player_rect);
         next_frame().await
     }
 }
 
 ////////////////////////////////////////////////////////////
-// __end-region:   ---      MAIN
+// __end-region: <--      MAIN
 ////////////////////////////////////////////////////////////
