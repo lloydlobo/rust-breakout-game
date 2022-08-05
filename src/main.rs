@@ -31,7 +31,7 @@ impl Player {
     }
 
     pub fn draw(&self) {
-        draw_rectangle(self.rect.x, self.rect.y, self.rect.w, self.rect.h, DARKGRAY);
+        draw_rectangle(self.rect.x, self.rect.y, self.rect.w, self.rect.h, PURPLE);
     }
 }
 
@@ -47,12 +47,12 @@ impl Player {
 ///
 /// # Docs Macroquad
 /// https://macroquad.rs/docs/
-#[macroquad::main("BasicShapes")]
+#[macroquad::main("Breakout")]
 async fn main() {
-    let player_rect = Player::new();
+    let player = Player::new();
     loop {
-        clear_background(SKYBLUE);
-        Player::draw(&player_rect);
+        clear_background(VIOLET);
+        player.draw();
         next_frame().await
     }
 }
