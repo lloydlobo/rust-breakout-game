@@ -1,17 +1,45 @@
 use macroquad::prelude::*;
-// https://macroquad.rs/docs/
 
+////////////////////////////////////////////////////////////
+// start-region:   ---      CONSTANTS
+////////////////////////////////////////////////////////////
+
+const PLAYER_SIZE: Vec2 = const_vec2!([150f32, 40f32]);
+
+////////////////////////////////////////////////////////////
+// __end-region:   ---      CONSTANTS
+////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////
+// start-region:   ---      MAIN
+////////////////////////////////////////////////////////////
+
+/// Main
+///
+/// # Docs Macroquad
+/// https://macroquad.rs/docs/
 #[macroquad::main("BasicShapes")]
 async fn main() {
+    let player_rect = Rect::new(
+        screen_width() * 0.5f32,
+        screen_height() - 100f32,
+        PLAYER_SIZE.x,
+        PLAYER_SIZE.y,
+    );
+
     loop {
-        clear_background(RED);
-
-        draw_line(40.0, 40.0, 100.0, 200.0, 15.0, BLUE);
-        draw_rectangle(screen_width() / 2.0 - 60.0, 100.0, 120.0, 60.0, GREEN);
-        draw_circle(screen_width() - 30.0, screen_height() - 30.0, 15.0, YELLOW);
-
-        draw_text("IT WORKS!", 20.0, 20.0, 30.0, DARKGRAY);
-
+        clear_background(SKYBLUE);
+        draw_rectangle(
+            player_rect.x,
+            player_rect.y,
+            player_rect.w,
+            player_rect.h,
+            DARKGRAY,
+        );
         next_frame().await
     }
 }
+
+////////////////////////////////////////////////////////////
+// __end-region:   ---      MAIN
+////////////////////////////////////////////////////////////
