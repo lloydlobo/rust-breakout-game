@@ -15,6 +15,7 @@ pub const PLAYER_SPEED: f32 = 700f32;
 pub const PLAYER_SIZE: Vec2 = const_vec2!([150f32, 40f32]);
 pub const BLOCK_SIZE: Vec2 = const_vec2!([75f32 * SIZE_FACTOR, 20f32 * SIZE_FACTOR]);
 pub const BALL_SIZE: f32 = 30f32;
+pub const BALL_SPEED: f32 = 700f32;
 // __end-region: <--      CONSTANTS
 
 ////////////////////////////////////////////////////////////
@@ -33,7 +34,7 @@ async fn main() {
     let padding: f32 = 5f32;
     let total_block_size: Vec2 = BLOCK_SIZE + vec2(padding, padding);
 
-    let board_position_start: Vec2 = vec2(
+    let board_pos_start: Vec2 = vec2(
         (screen_width() - (total_block_size.x * width as f32)) / 2f32,
         50f32,
     );
@@ -43,14 +44,14 @@ async fn main() {
         let block_x: f32 = (i % width) as f32 * total_block_size.x;
         let block_y: f32 = (i / height) as f32 * total_block_size.y;
 
-        blocks.push(Block::new(board_position_start + vec2(block_x, block_y)));
+        blocks.push(Block::new(board_pos_start + vec2(block_x, block_y)));
     }
 
-    let ball = Ball::new(vec2(board_position_start.x, board_position_start.y));
+    let mut ball = Ball::new(vec2(board_pos_start.x, board_pos_start.y));
 
     loop {
         player.update(get_frame_time());
-        // ball.update();
+        ball.update(get_frame_time());
         clear_background(VIOLET);
 
         ball.draw();
