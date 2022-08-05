@@ -1,4 +1,7 @@
-use macroquad::prelude::*;
+use macroquad::{
+    prelude::{Rect, Vec2, GOLD},
+    shapes::draw_rectangle,
+};
 
 use crate::BLOCK_SIZE;
 

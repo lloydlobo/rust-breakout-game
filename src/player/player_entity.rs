@@ -2,7 +2,6 @@ use macroquad::prelude::*;
 
 use crate::{PLAYER_SIZE, PLAYER_SPEED};
 
-
 ////////////////////////////////////////////////////////////
 // start-region: -->      PLAYER
 ////////////////////////////////////////////////////////////
@@ -32,17 +31,32 @@ impl Player {
             (false, true) => 1f32,
             _ => 0f32,
         };
+        let y_move = match (is_key_down(KeyCode::Up), is_key_down(KeyCode::Down)) {
+            (true, false) => -1f32,
+            (false, true) => 1f32,
+            _ => 0f32,
+        };
+
         self.rect.x += x_move * delta_time * PLAYER_SPEED;
+        self.rect.y += y_move * delta_time * PLAYER_SPEED.sqrt();
 
         self.detect_collision();
     }
 
     fn detect_collision(&mut self) {
+        const LIMIT_HEIGHT: f32 = 0.618f32;
+
         if self.rect.x < 0f32 {
             self.rect.x = 0f32;
         }
         if self.rect.x > screen_width() - self.rect.w {
             self.rect.x = screen_width() - self.rect.w;
+        }
+        if self.rect.y < screen_height() * LIMIT_HEIGHT {
+            self.rect.y = screen_height() * LIMIT_HEIGHT;
+        }
+        if self.rect.y > screen_height() - self.rect.h {
+            self.rect.y = screen_height() - self.rect.h;
         }
     }
 
@@ -63,7 +77,11 @@ impl Default for Player {
 
 #[cfg(test)]
 mod tests {
-    // use super::*;
+    use std::time::SystemTime;
+
+    use macroquad::miniquad::{date::now, native::linux_x11::libx11::Time};
+
+    use super::*;
 
     #[test]
     fn it_works() {
@@ -73,6 +91,18 @@ mod tests {
     #[test]
     fn test_player_entity() {
         assert_eq!(1, 1);
+    }
+
+    #[test]
+    fn it_gets_frame_time() {
+        pub fn get_time() -> f64 {
+            let start_time_duration = std::time::SystemTime::now()
+                .duration_since(SystemTime::UNIX_EPOCH)
+                .unwrap_or_else(|e| panic!("{}", e));
+        let now = start_time_duration.as_secs_f64();
+
+            miniquad::date::now() - now
+        }
     }
 }
 

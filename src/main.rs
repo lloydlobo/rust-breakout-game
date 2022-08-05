@@ -1,8 +1,10 @@
 use crate::player::player_entity::Player;
+use ball::ball_entity::Ball;
 use block::block_entity::Block;
 use macroquad::prelude::*;
 
 // start-region: -->      Mods
+pub mod ball;
 pub mod block;
 pub mod player;
 // __end-region: <--      Mods
@@ -12,6 +14,7 @@ pub const SIZE_FACTOR: f32 = 1.618f32;
 pub const PLAYER_SPEED: f32 = 700f32;
 pub const PLAYER_SIZE: Vec2 = const_vec2!([150f32, 40f32]);
 pub const BLOCK_SIZE: Vec2 = const_vec2!([75f32 * SIZE_FACTOR, 20f32 * SIZE_FACTOR]);
+pub const BALL_SIZE: f32 = 30f32;
 // __end-region: <--      CONSTANTS
 
 ////////////////////////////////////////////////////////////
@@ -43,10 +46,14 @@ async fn main() {
         blocks.push(Block::new(board_position_start + vec2(block_x, block_y)));
     }
 
+    let ball = Ball::new(vec2(board_position_start.x, board_position_start.y));
+
     loop {
         player.update(get_frame_time());
+        // ball.update();
         clear_background(VIOLET);
 
+        ball.draw();
         player.draw();
         for block in blocks.iter() {
             block.draw();
