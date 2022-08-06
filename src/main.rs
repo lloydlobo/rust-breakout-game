@@ -15,7 +15,7 @@ pub const PLAYER_SPEED: f32 = 700f32;
 pub const PLAYER_SIZE: Vec2 = const_vec2!([150f32, 40f32]);
 pub const BLOCK_SIZE: Vec2 = const_vec2!([75f32 * SIZE_FACTOR, 20f32 * SIZE_FACTOR]);
 pub const BALL_SIZE: f32 = 30f32;
-pub const BALL_SPEED: f32 = 7f32;
+pub const BALL_SPEED: f32 = 401f32;
 // __end-region: <--      CONSTANTS
 
 ////////////////////////////////////////////////////////////
