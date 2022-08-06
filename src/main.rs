@@ -36,9 +36,10 @@ async fn main() {
         50f32,
     );
 
-    let mut ball: Ball = Ball::new(vec2(board_pos_start.x, board_pos_start.y));
     let mut blocks: Vec<Block> = Vec::new();
     let mut player: Player = Player::new();
+    let mut balls = Vec::new();
+    let ball_new: Ball = Ball::new(vec2(screen_width() * 0.5f32 , screen_height() * 0.5f32));
 
     for i in 0..width * height {
         let block_x: f32 = (i % width) as f32 * total_block_size.x;
@@ -46,15 +47,24 @@ async fn main() {
         blocks.push(Block::new(board_pos_start + vec2(block_x, block_y)));
     } // generate looping value as --> 0,1,2,3,4,5,0,1,2,3,4,5,..
 
+    balls.push(ball_new);
+    
     loop {
         player.update(get_frame_time());
-        ball.update(get_frame_time());
+        for ball in balls.iter_mut() {
+            ball.update(get_frame_time());
+        }
+        
         clear_background(VIOLET);
-        ball.draw();
-        player.draw();
+        
         for block in blocks.iter() {
             block.draw();
         }
+        for ball in balls.iter_mut() {
+            ball.draw();
+        }
+        player.draw();
+        
         next_frame().await
     }
 }

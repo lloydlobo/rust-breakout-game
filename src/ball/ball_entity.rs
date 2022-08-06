@@ -29,7 +29,6 @@ impl Ball {
         draw_rectangle(self.rect.x, self.rect.y, self.rect.w, self.rect.h, RED)
     }
 
-
     fn detect_collision(&mut self) {
         if self.rect.x < 0f32 {
             self.vel.x = 1f32;
