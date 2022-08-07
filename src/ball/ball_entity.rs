@@ -7,8 +7,8 @@ use macroquad::{
 use crate::{BALL_SIZE, BALL_SPEED};
 
 pub struct Ball {
-    rect: Rect,
-    vel: Vec2,
+    pub rect: Rect,
+    pub vel: Vec2,
 }
 
 impl Ball {
@@ -24,7 +24,7 @@ impl Ball {
         self.rect.y += self.vel.y * delta_time * BALL_SPEED;
         self.detect_collision();
     }
-    
+
     pub fn draw(&self) {
         draw_rectangle(self.rect.x, self.rect.y, self.rect.w, self.rect.h, RED)
     }

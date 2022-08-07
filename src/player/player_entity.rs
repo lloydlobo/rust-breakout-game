@@ -8,7 +8,7 @@ use crate::{PLAYER_SIZE, PLAYER_SPEED};
 
 #[derive(PartialEq, Debug)]
 pub struct Player {
-    rect: Rect,
+    pub rect: Rect,
 }
 
 impl Player {

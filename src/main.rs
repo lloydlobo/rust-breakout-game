@@ -18,6 +18,24 @@ pub const BALL_SIZE: f32 = 30f32;
 pub const BALL_SPEED: f32 = 401f32;
 // __end-region: <--      CONSTANTS
 
+
+////////////////////////////////////////////////////////////
+// start-region: -->      Collision Detection
+////////////////////////////////////////////////////////////
+
+pub fn resolve_collision(a: &mut Rect, vel: &mut Vec2, b: &Rect ) -> bool {
+   if let Some (_intersection) = a.intersect(*b) {
+      vel.y *= -1f32; 
+      return true;
+   }
+    
+   false
+}
+
+////////////////////////////////////////////////////////////
+// __end-region: -->      Collision Detection
+////////////////////////////////////////////////////////////
+
 ////////////////////////////////////////////////////////////
 // start-region: -->      MAIN
 ////////////////////////////////////////////////////////////
@@ -59,6 +77,9 @@ async fn main() {
             ball.update(get_frame_time());
         }
 
+        for ball in balls.iter_mut() {
+            resolve_collision(&mut ball.rect, &mut ball.vel, &player.rect);
+        }
         clear_background(VIOLET);
 
         for block in blocks.iter() {
