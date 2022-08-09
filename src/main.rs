@@ -27,6 +27,8 @@ pub fn resolve_collision(a: &mut Rect, vel: &mut Vec2, b: &Rect ) -> bool {
       vel.y *= -1f32; 
       return true;
    }
+
+   // TODO add lives block update here
     
    false
 }
